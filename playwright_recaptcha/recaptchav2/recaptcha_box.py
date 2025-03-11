@@ -483,7 +483,10 @@ class SyncRecaptchaBox(RecaptchaBox[SyncFrame]):
             True if the reCAPTCHA challenge is visible, False otherwise.
         """
         button = self.skip_button.or_(self.next_button).or_(self.verify_button)
-        return button.is_enabled()
+        if button.is_visible():
+            return True
+        else:
+            return False
 
     @_check_if_attached
     def audio_challenge_is_visible(self) -> bool:
